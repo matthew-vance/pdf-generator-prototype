@@ -16,6 +16,7 @@ export default [
       "**/dist/**",
       "**/dist-ssr/**",
       "**/dist-electron/**",
+      "**/release/**",
       "**/coverage/**",
     ],
   },

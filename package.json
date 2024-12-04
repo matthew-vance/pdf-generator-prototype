@@ -15,8 +15,9 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/ electron/",
     "electron": "electron .",
-    "clean": "rimraf dist dist-electron",
-    "ci": "pnpm build && prettier --check src/ electron/ && eslint . && vitest run && pnpm test:e2e"
+    "clean": "rimraf dist dist-electron release",
+    "ci": "pnpm build && prettier --check src/ electron/ && eslint . && vitest run && pnpm test:e2e",
+    "package": "pnpm build && electron-builder -m --config electron-builder-config.ts"
   },
   "dependencies": {
     "pinia": "^2.3.0",
@@ -36,6 +37,7 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
     "eslint": "^9.16.0",
     "eslint-plugin-playwright": "^2.1.0",
     "eslint-plugin-vue": "^9.32.0",
