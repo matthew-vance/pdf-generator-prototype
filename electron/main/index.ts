@@ -12,6 +12,8 @@ const createWindow = () => {
     height: 1064,
     backgroundColor: "#181818",
     webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
       preload: join(__dirname, "..", "preload", "index.mjs"),
     },
   });
@@ -41,13 +43,15 @@ const createWindow = () => {
   });
 };
 
-app.whenReady().then(() => {
+(async () => {
+  await app.whenReady();
+
   createWindow();
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
-});
+})();
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
