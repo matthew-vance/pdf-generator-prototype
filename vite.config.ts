@@ -16,25 +16,26 @@ export default defineConfig({
     vue(),
     vueJsx(),
     vueDevTools(),
-    electron({
-      main: {
-        entry: "electron/main/index.ts",
-        vite: {
-          build: {
-            outDir: "dist-electron/main",
+    !process.env.E2E_TESTING &&
+      electron({
+        main: {
+          entry: "electron/main/index.ts",
+          vite: {
+            build: {
+              outDir: "dist-electron/main",
+            },
           },
         },
-      },
-      preload: {
-        input: "electron/preload/index.ts",
-        vite: {
-          build: {
-            outDir: "dist-electron/preload",
+        preload: {
+          input: "electron/preload/index.ts",
+          vite: {
+            build: {
+              outDir: "dist-electron/preload",
+            },
           },
         },
-      },
-      renderer: {},
-    }),
+        renderer: {},
+      }),
   ],
   resolve: {
     alias: {
