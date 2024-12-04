@@ -7,6 +7,7 @@ export default () => ({
   files: ["dist", "dist-electron"],
   mac: {
     artifactName: "${name}_${version}_${os}_${arch}.${ext}",
+    icon: "icons/mac/icon.icns",
     target: [
       {
         target: "default",
