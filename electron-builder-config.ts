@@ -1,4 +1,6 @@
-export default () => ({
+import type { Configuration } from "electron-builder";
+
+export default (): Configuration => ({
   appId: "me.matthewvance.pdf-generator-prototype",
   productName: "PDF Generator Prototype",
   directories: {
