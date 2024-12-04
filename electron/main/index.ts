@@ -1,4 +1,9 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain, nativeTheme } from "electron";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -6,6 +11,9 @@ const createWindow = () => {
     width: 1320,
     height: 1064,
     backgroundColor: "#181818",
+    webPreferences: {
+      preload: join(__dirname, "..", "preload", "index.mjs"),
+    },
   });
 
   win.once("ready-to-show", () => {
@@ -18,6 +26,19 @@ const createWindow = () => {
   } else {
     win.loadFile("dist/index.html");
   }
+
+  ipcMain.handle("dark-mode:toggle", () => {
+    if (nativeTheme.shouldUseDarkColors) {
+      nativeTheme.themeSource = "light";
+    } else {
+      nativeTheme.themeSource = "dark";
+    }
+    return nativeTheme.shouldUseDarkColors;
+  });
+
+  ipcMain.handle("dark-mode:system", () => {
+    nativeTheme.themeSource = "system";
+  });
 };
 
 app.whenReady().then(() => {

@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "main": "dist-electron/index.js",
+  "main": "dist-electron/main/index.js",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "pnpm clean && run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
     "test:e2e": "playwright test",
@@ -14,7 +14,8 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/ electron/",
-    "electron": "electron ."
+    "electron": "electron .",
+    "clean": "rimraf dist dist-electron"
   },
   "dependencies": {
     "pinia": "^2.2.6",
@@ -40,6 +41,7 @@
     "jsdom": "^25.0.1",
     "npm-run-all2": "^7.0.1",
     "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
     "typescript": "~5.6.3",
     "vite": "^6.0.1",
     "vite-plugin-electron": "^0.29.0",
