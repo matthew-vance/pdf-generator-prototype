@@ -17,7 +17,7 @@
     "electron": "electron .",
     "clean": "rimraf dist dist-electron release",
     "ci": "pnpm build && prettier --check src/ electron/ && eslint . && vitest run && pnpm test:e2e",
-    "package": "pnpm build && electron-builder -m --config electron-builder-config.ts"
+    "package": "pnpm build && electron-builder -mw --config electron-builder-config.ts"
   },
   "dependencies": {
     "pinia": "^2.3.0",
