@@ -1,20 +1,25 @@
-import { app, BrowserWindow, ipcMain, nativeTheme, shell } from "electron";
-import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { app, BrowserWindow, ipcMain, nativeTheme } from "electron";
+import path from "node:path";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const MAIN_DIST = path.join(app.getAppPath(), "dist-electron");
+const RENDERER_DIST = path.join(app.getAppPath(), "dist");
 
-const createWindow = () => {
+const preloadPath = path.join(MAIN_DIST, "preload", "index.mjs");
+const indexHtmlPath = path.join(RENDERER_DIST, "index.html");
+
+const iconPath = process.env.VITE_PUBLIC
+  ? path.join(process.env.VITE_PUBLIC, "favicon.ico")
+  : undefined;
+
+const createWindow = async () => {
   const win = new BrowserWindow({
     title: "PDF Generator Prototype",
     width: 1320,
     height: 1064,
     backgroundColor: "#181818",
+    icon: iconPath,
     webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true,
-      preload: join(__dirname, "..", "preload", "index.mjs"),
+      preload: preloadPath,
     },
   });
 
@@ -22,16 +27,11 @@ const createWindow = () => {
     win.show();
   });
 
-  win.webContents.setWindowOpenHandler(({ url }) => {
-    shell.openExternal(url);
-    return { action: "deny" };
-  });
-
   if (process.env.VITE_DEV_SERVER_URL) {
-    win.loadURL(process.env.VITE_DEV_SERVER_URL);
+    await win.loadURL(process.env.VITE_DEV_SERVER_URL);
     // win.webContents.openDevTools();
   } else {
-    win.loadFile("dist/index.html");
+    await win.loadFile(indexHtmlPath);
   }
 
   ipcMain.handle("dark-mode:toggle", () => {
@@ -51,7 +51,7 @@ const createWindow = () => {
 (async () => {
   await app.whenReady();
 
-  createWindow();
+  await createWindow();
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
