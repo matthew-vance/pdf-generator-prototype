@@ -14,11 +14,6 @@ export default defineConfig({
       plugins: [tailwind(), autoprefixer()],
     },
   },
-  css: {
-    postcss: {
-      plugins: [tailwind(), autoprefixer()],
-    },
-  },
   plugins: [
     vue(),
     vueJsx(),

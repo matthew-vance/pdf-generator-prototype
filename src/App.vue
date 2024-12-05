@@ -18,13 +18,10 @@ const toggleDarkMode = window.electronApi && window.electronApi.darkMode.toggle;
     <div class="wrapper">
       <div class="flex gap-2">
         <h1 class="text-3xl font-bold underline">Hello world!</h1>
-        <button
-          v-if="toggleDarkMode"
-          @click="toggleDarkMode"
-          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded dark:bg-gray-800 dark:hover:bg-gray-600 dark:text-gray-200"
-        >
+        <button v-if="toggleDarkMode" @click="toggleDarkMode" class="btn">
           Toggle Dark Mode
         </button>
+        <a href="https://google.com" rel="noopener">Test Link</a>
       </div>
 
       <HelloWorld msg="You did it!" />
