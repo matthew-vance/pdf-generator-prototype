@@ -2,9 +2,7 @@
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
 
-const toggleDarkMode = () => {
-  window.electronApi.darkMode.toggle();
-};
+const toggleDarkMode = window.electronApi && window.electronApi.darkMode.toggle;
 </script>
 
 <template>
@@ -21,6 +19,7 @@ const toggleDarkMode = () => {
       <div class="flex gap-2">
         <h1 class="text-3xl font-bold underline">Hello world!</h1>
         <button
+          v-if="toggleDarkMode"
           @click="toggleDarkMode"
           class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded dark:bg-gray-800 dark:hover:bg-gray-600 dark:text-gray-200"
         >
