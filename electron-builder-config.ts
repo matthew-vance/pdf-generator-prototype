@@ -18,4 +18,17 @@ export default (): Configuration => ({
     ],
     identity: null,
   },
+  win: {
+    icon: "icons/png",
+    artifactName: "${name}_${version}_${os}_${arch}_installer.${ext}",
+    target: [
+      {
+        target: "nsis",
+        arch: ["x64", "arm64"],
+      },
+    ],
+  },
+  nsis: {
+    shortcutName: "PDF Generator Prototype",
+  },
 });
