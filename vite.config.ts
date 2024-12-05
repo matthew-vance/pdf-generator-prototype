@@ -5,7 +5,6 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDevTools from "vite-plugin-vue-devtools";
 import autoprefixer from "autoprefixer";
 import tailwind from "tailwindcss";
-import electron from "vite-plugin-electron/simple";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -14,30 +13,7 @@ export default defineConfig({
       plugins: [tailwind(), autoprefixer()],
     },
   },
-  plugins: [
-    vue(),
-    vueJsx(),
-    vueDevTools(),
-    !process.env.E2E_TESTING &&
-      electron({
-        main: {
-          entry: "electron/main/index.ts",
-          vite: {
-            build: {
-              outDir: "dist-electron/main",
-            },
-          },
-        },
-        preload: {
-          input: "electron/preload/index.ts",
-          vite: {
-            build: {
-              outDir: "dist-electron/preload",
-            },
-          },
-        },
-      }),
-  ],
+  plugins: [vue(), vueJsx(), vueDevTools()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),

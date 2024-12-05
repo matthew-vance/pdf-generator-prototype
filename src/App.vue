@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
+import { invoke } from "@tauri-apps/api/core";
 
-const toggleDarkMode = () => {
-  window.electronApi.darkMode.toggle();
-};
+const toggleDarkMode = () => invoke("toggle_theme");
 </script>
 
 <template>
