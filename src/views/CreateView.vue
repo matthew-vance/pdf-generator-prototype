@@ -1,0 +1,13 @@
+<script setup lang="ts"></script>
+
+<template>
+  <main>
+    <h2>This will be the "Create PDF" page</h2>
+    <div class="container flex">
+      <section class="flex-1">
+        <h3>Form</h3>
+      </section>
+      <section class="flex-1"><h3>Preview</h3></section>
+    </div>
+  </main>
+</template>

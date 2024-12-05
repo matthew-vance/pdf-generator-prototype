@@ -16,7 +16,6 @@ const createWindow = async () => {
     title: "PDF Generator Prototype",
     width: 1320,
     height: 1064,
-    backgroundColor: "#181818",
     icon: iconPath,
     webPreferences: {
       preload: preloadPath,
