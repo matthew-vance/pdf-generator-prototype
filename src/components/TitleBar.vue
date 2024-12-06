@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { simpleFaker } from "@faker-js/faker";
+import { randFileName, randParagraph } from "@ngneat/falso";
 import {
   SquarePen,
   PanelRightOpen,
@@ -30,7 +30,12 @@ const uiStore = useUiStore();
       <li>
         <button
           class="btn btn-sm btn-square btn-ghost rounded"
-          @click="filesStore.addFile(simpleFaker.string.nanoid())"
+          @click="
+            filesStore.addFile(
+              randFileName(),
+              randParagraph({ length: 10 }).join(' '),
+            )
+          "
         >
           <SquarePen :size="20" />
         </button>
@@ -38,7 +43,7 @@ const uiStore = useUiStore();
     </ul>
     <div class="titlebar flex-1"></div>
     <ul class="menu menu-horizontal gap-2">
-      <li>
+      <li v-if="filesStore.selectedFile">
         <button
           title="Collapse"
           class="btn btn-sm btn-square btn-ghost rounded"

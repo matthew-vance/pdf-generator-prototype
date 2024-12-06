@@ -11,14 +11,16 @@ import BottomBar from "@/components/BottomBar.vue";
 
 <template>
   <div class="h-screen bg-base-200">
-    <main class="h-full grid grid-cols-layout grid-rows-layout">
-      <div class="pl-20 col-span-full bg-base-300">
+    <main
+      class="h-full grid grid-cols-layout grid-rows-layout overflow-y-hidden overflow-x-hidden"
+    >
+      <div class="pl-20 col-span-full bg-base-300 border-b border-neutral">
         <TitleBar />
       </div>
       <FileManagementPanel class="bg-base-300" />
-      <section class="bg-base-200"></section>
+      <section :class="['bg-base-200 w-full']"></section>
       <PDFViewPanel class="bg-base-100" />
-      <div class="bg-base-300 flex col-span-full">
+      <div class="bg-base-300 flex col-span-full border-t border-neutral">
         <BottomBar />
       </div>
     </main>

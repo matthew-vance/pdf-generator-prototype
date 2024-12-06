@@ -1,9 +1,23 @@
 <script setup lang="ts">
-import { useFilesStore } from "@/stores/files";
+import { useFilesStore, type File } from "@/stores/files";
 import { useUiStore } from "@/stores/ui";
 
 const filesStore = useFilesStore();
 const uiStore = useUiStore();
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    filesStore.clearSelectedFile();
+  }
+});
+
+function handleFileClick(file: File) {
+  if (filesStore.selectedFile?.id === file.id) {
+    filesStore.clearSelectedFile();
+  } else {
+    filesStore.selectFile(file);
+  }
+}
 </script>
 
 <template>
@@ -12,24 +26,31 @@ const uiStore = useUiStore();
       <div class="w-full flex flex-col">
         <div class="py-3 px-2 flex">
           <input
+            v-if="filesStore.files.length"
             type="text"
             class="input input-bordered input-sm w-full max-w-xs"
-            placeholder="Search"
+            placeholder="Filter"
+            v-model="filesStore.searchTerm"
           />
         </div>
         <div
           class="flex-grow pl-4 pr-3 pt-1 pb-6 overflow-y-auto overflow-x-hidden"
         >
-          <ul class="menu menu-sm space-y-0.5">
-            <li v-for="(file, index) in filesStore.filesSorted" :key="index">
-              <div>
-                <button
-                  class="text-ellipsis overflow-hidden whitespace-nowrap"
-                  :title="file.name"
-                >
+          <ul class="menu menu-sm gap-0.5">
+            <li v-for="(file, index) in filesStore.filteredFiles" :key="index">
+              <button
+                @click="handleFileClick(file)"
+                @pointerdown.prevent
+                :title="file.name"
+                class="prose"
+                :class="{
+                  active: filesStore.selectedFile?.id === file.id,
+                }"
+              >
+                <p class="text-ellipsis overflow-hidden whitespace-nowrap">
                   {{ file.name }}
-                </button>
-              </div>
+                </p>
+              </button>
             </li>
           </ul>
         </div>

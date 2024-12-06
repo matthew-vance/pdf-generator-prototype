@@ -1,26 +1,55 @@
 <script setup lang="ts">
-import { Save } from "lucide-vue-next";
+import { Download, CopyPlus, Trash2 } from "lucide-vue-next";
 import { useUiStore } from "@/stores/ui";
+import { useFilesStore } from "@/stores/files";
 
 const uiStore = useUiStore();
+const filesStore = useFilesStore();
 </script>
 
 <template>
   <Transition>
-    <section v-show="uiStore.rightSidebar.isOpen" class="flex -col-end-1">
+    <section
+      v-show="filesStore.selectedFile && uiStore.rightSidebar.isOpen"
+      class="flex -col-end-1"
+    >
       <hr
         class="h-full w-0.5 bg-neutral border-transparent hover:bg-secondary cursor-col-resize z-20"
       />
       <div class="h-full w-full flex flex-col">
-        <ul class="menu menu-horizontal rounded-box justify-center">
+        <ul
+          v-if="filesStore.selectedFile"
+          class="menu menu-horizontal rounded-box justify-center gap-2"
+        >
           <li>
             <button class="btn btn-sm btn-ghost">
-              <Save :size="20" />
-              Export PDF
+              <Download :size="20" />
+              Export
+            </button>
+          </li>
+          <li>
+            <button
+              class="btn btn-sm btn-ghost"
+              @click="filesStore.duplicateFile(filesStore.selectedFile)"
+            >
+              <CopyPlus :size="20" />Duplicate
+            </button>
+          </li>
+          <li>
+            <button
+              class="btn btn-sm btn-ghost text-error hover:text-error-content"
+              @click="filesStore.deleteFile(filesStore.selectedFile)"
+            >
+              <Trash2 :size="20" />
+              Delete
             </button>
           </li>
         </ul>
-        <div class="flex-grow px-3 pt-1 pb-6">PDF Viewer</div>
+        <div class="flex-grow px-3 pt-1 pb-6 overflow-auto prose">
+          <pre v-if="filesStore.selectedFile" class="text-wrap">{{
+            JSON.stringify(filesStore.selectedFile, null, 3)
+          }}</pre>
+        </div>
       </div>
     </section>
   </Transition>
