@@ -20,10 +20,10 @@
     "package": "pnpm build && electron-builder -mw --config electron-builder-config.ts"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.3.0",
     "lucide-vue-next": "^0.468.0",
     "pinia": "^2.3.0",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0",

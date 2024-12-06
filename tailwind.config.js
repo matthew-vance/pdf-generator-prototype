@@ -5,11 +5,17 @@ import daisyui from "daisyui";
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        layout: "240px 1fr 384px",
+      },
+      gridTemplateRows: {
+        layout: "48px minmax(0,1fr) 48px",
+      },
+    },
   },
   plugins: [typography, daisyui],
   daisyui: {
-    themes: ["corporate", "business"],
-    darkTheme: "business",
+    themes: ["business"],
   },
 };

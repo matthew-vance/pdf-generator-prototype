@@ -14,6 +14,9 @@ const iconPath = process.env.VITE_PUBLIC
 const createWindow = async () => {
   const win = new BrowserWindow({
     title: "PDF Generator Prototype",
+    titleBarStyle: "hidden",
+    trafficLightPosition: { x: 10, y: 16 },
+    ...(process.platform !== "darwin" ? { titleBarOverlay: true } : {}), // TODO: Fix title bar on Windows
     width: 1320,
     height: 1064,
     icon: iconPath,

@@ -1,0 +1,54 @@
+<script setup lang="ts">
+import { useFilesStore } from "@/stores/files";
+import { useUiStore } from "@/stores/ui";
+
+const filesStore = useFilesStore();
+const uiStore = useUiStore();
+</script>
+
+<template>
+  <Transition>
+    <section v-show="uiStore.leftSidebar.isOpen" class="flex">
+      <div class="w-full flex flex-col">
+        <div class="py-3 px-2 flex">
+          <input
+            type="text"
+            class="input input-bordered input-sm w-full max-w-xs"
+            placeholder="Search"
+          />
+        </div>
+        <div
+          class="flex-grow pl-4 pr-3 pt-1 pb-6 overflow-y-auto overflow-x-hidden"
+        >
+          <ul class="menu menu-sm space-y-0.5">
+            <li v-for="(file, index) in filesStore.filesSorted" :key="index">
+              <div>
+                <button
+                  class="text-ellipsis overflow-hidden whitespace-nowrap"
+                  :title="file.name"
+                >
+                  {{ file.name }}
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <hr
+        class="h-full w-0.5 bg-neutral border-transparent hover:bg-secondary cursor-col-resize"
+      />
+    </section>
+  </Transition>
+</template>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: transform 0.3s ease-in-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: translateX(-240px);
+}
+</style>
