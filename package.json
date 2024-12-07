@@ -17,7 +17,7 @@
     "electron": "electron .",
     "clean": "rimraf dist dist-electron release",
     "ci": "pnpm build && prettier --check src/ electron/ && eslint . && vitest run && pnpm test:e2e",
-    "package": "pnpm build && electron-builder -mw --config electron-builder-config.ts"
+    "package": "pnpm clean && pnpm build-only && electron-builder -mw --config electron-builder-config.ts"
   },
   "dependencies": {
     "@ngneat/falso": "^7.2.0",
