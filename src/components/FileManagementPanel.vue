@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useFilesStore, type File } from "@/stores/files";
 import { useUiStore } from "@/stores/ui";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const filesStore = useFilesStore();
 const uiStore = useUiStore();
@@ -22,42 +24,42 @@ function handleFileClick(file: File) {
 
 <template>
   <Transition>
-    <section v-show="uiStore.leftSidebar.isOpen" class="flex">
+    <section
+      v-show="filesStore.files.length && uiStore.leftSidebar.isOpen"
+      class="flex"
+    >
       <div class="w-full flex flex-col">
         <div class="py-3 px-2 flex">
-          <input
+          <Input
             v-if="filesStore.files.length"
             type="text"
-            class="input input-bordered input-sm w-full max-w-xs"
             placeholder="Filter"
             v-model="filesStore.searchTerm"
           />
         </div>
         <div
-          class="flex-grow pl-4 pr-3 pt-1 pb-6 overflow-y-auto overflow-x-hidden"
+          class="pl-4 pr-3 pt-1 pb-6 flex flex-col gap-1 overflow-y-auto overflow-x-hidden"
         >
-          <ul class="menu menu-sm gap-0.5">
-            <li v-for="(file, index) in filesStore.filteredFiles" :key="index">
-              <button
-                @click="handleFileClick(file)"
-                @pointerdown.prevent
-                :title="file.name"
-                class="prose"
-                :class="{
-                  active: filesStore.selectedFile?.id === file.id,
-                }"
-              >
-                <p class="text-ellipsis overflow-hidden whitespace-nowrap">
-                  {{ file.name }}
-                </p>
-              </button>
-            </li>
-          </ul>
+          <Button
+            v-for="(file, index) in filesStore.filteredFiles"
+            :key="index"
+            :variant="
+              filesStore.selectedFile?.id === file.id ? 'secondary' : 'ghost'
+            "
+            @click="handleFileClick(file)"
+            @pointerdown.prevent
+            :title="file.name"
+            class="justify-start"
+            :class="{
+              active: filesStore.selectedFile?.id === file.id,
+            }"
+          >
+            <p class="text-ellipsis overflow-hidden whitespace-nowrap">
+              {{ file.name }}
+            </p>
+          </Button>
         </div>
       </div>
-      <hr
-        class="h-full w-0.5 bg-neutral border-transparent hover:bg-secondary cursor-col-resize"
-      />
     </section>
   </Transition>
 </template>

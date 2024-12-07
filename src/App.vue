@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from "vue";
+import { useColorMode } from "@vueuse/core";
 
 const TitleBar = defineAsyncComponent(
   () => import("@/components/TitleBar.vue"),
@@ -7,22 +8,20 @@ const TitleBar = defineAsyncComponent(
 import FileManagementPanel from "@/components/FileManagementPanel.vue";
 import PDFViewPanel from "@/components/PDFViewPanel.vue";
 import BottomBar from "@/components/BottomBar.vue";
+
+useColorMode();
 </script>
 
 <template>
-  <div class="h-screen bg-base-200">
+  <div class="h-screen">
     <main
-      class="h-full grid grid-cols-layout grid-rows-layout overflow-y-hidden overflow-x-hidden"
+      class="h-full grid grid-cols-layout grid-rows-layout overflow-y-hidden overflow-x-hidden bg-zinc-900"
     >
-      <div class="pl-20 col-span-full bg-base-300 border-b border-neutral">
-        <TitleBar />
-      </div>
-      <FileManagementPanel class="bg-base-300" />
-      <section :class="['bg-base-200 w-full']"></section>
-      <PDFViewPanel class="bg-base-100" />
-      <div class="bg-base-300 flex col-span-full border-t border-neutral">
-        <BottomBar />
-      </div>
+      <TitleBar class="pl-20 col-span-full border-b bg-background" />
+      <FileManagementPanel class="border-r bg-background" />
+      <section class="w-full"></section>
+      <PDFViewPanel class="border-l bg-background" />
+      <BottomBar class="flex col-span-full border-t bg-background" />
     </main>
   </div>
 </template>
