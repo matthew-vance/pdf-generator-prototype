@@ -3,6 +3,7 @@ import { Download, CopyPlus, Trash2 } from "lucide-vue-next";
 import { useUiStore } from "@/stores/ui";
 import { useFilesStore } from "@/stores/files";
 import { Button } from "@/components/ui/button";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const uiStore = useUiStore();
 const filesStore = useFilesStore();
@@ -35,11 +36,12 @@ const filesStore = useFilesStore();
             Delete
           </Button>
         </div>
-        <div class="flex-grow px-3 pt-1 pb-6 overflow-auto prose">
+        <ScrollArea class="px-3 pt-1 pb-6">
           <pre v-if="filesStore.selectedFile" class="text-wrap">{{
             JSON.stringify(filesStore.selectedFile, null, 3)
           }}</pre>
-        </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </div>
     </section>
   </Transition>
@@ -48,7 +50,7 @@ const filesStore = useFilesStore();
 <style scoped>
 .v-enter-active,
 .v-leave-active {
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in;
 }
 
 .v-enter-from,
