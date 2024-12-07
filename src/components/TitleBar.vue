@@ -18,7 +18,6 @@ const uiStore = useUiStore();
 <template>
   <div class="flex justify-between items-center gap-1 h-full pr-4">
     <Button
-      v-if="filesStore.files.length"
       variant="ghost"
       size="icon"
       title="Collapse"

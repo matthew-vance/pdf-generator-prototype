@@ -20,15 +20,11 @@ function handleFileClick(file: File) {
 
 <template>
   <Transition>
-    <section
-      v-show="filesStore.files.length && uiStore.leftSidebar.isOpen"
-      class="flex"
-    >
+    <section v-show="uiStore.leftSidebar.isOpen" class="flex">
       <div class="w-full flex flex-col">
         <div class="px-3 py-3">
           <div class="relative w-full max-w-sm items-center">
             <Input
-              v-if="filesStore.files.length"
               class="pl-10"
               type="text"
               placeholder="Filter"
