@@ -5,6 +5,7 @@ export type File = {
   id: number;
   name: string;
   content: string;
+  createdAt: Date;
 };
 
 export const useFilesStore = defineStore("files", () => {
@@ -13,7 +14,7 @@ export const useFilesStore = defineStore("files", () => {
   const searchTerm = ref<string>("");
 
   const filesSorted = computed(() =>
-    files.value.sort((a, b) => a.name.localeCompare(b.name)),
+    files.value.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()),
   );
 
   const filteredFiles = computed(() =>
@@ -23,7 +24,12 @@ export const useFilesStore = defineStore("files", () => {
   );
 
   function addFile(name: string, content: string) {
-    const newFile = { name, content, id: files.value.length + 1 };
+    const newFile = {
+      name,
+      content,
+      id: files.value.length + 1,
+      createdAt: new Date(),
+    };
     files.value.push(newFile);
     selectFile(newFile);
   }
@@ -45,6 +51,7 @@ export const useFilesStore = defineStore("files", () => {
       name: newFileName,
       content: file.content,
       id: files.value.length + 1,
+      createdAt: new Date(),
     };
     files.value.push(newFile);
     selectFile(newFile);

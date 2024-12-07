@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Search } from "lucide-vue-next";
 import { useFilesStore, type File } from "@/stores/files";
 import { useUiStore } from "@/stores/ui";
 import { Button } from "@/components/ui/button";
@@ -29,14 +30,23 @@ function handleFileClick(file: File) {
       class="flex"
     >
       <div class="w-full flex flex-col">
-        <div class="py-3 px-2 flex">
-          <Input
-            v-if="filesStore.files.length"
-            type="text"
-            placeholder="Filter"
-            v-model="filesStore.searchTerm"
-          />
+        <div class="px-3 py-3">
+          <div class="relative w-full max-w-sm items-center">
+            <Input
+              v-if="filesStore.files.length"
+              class="pl-10"
+              type="text"
+              placeholder="Filter"
+              v-model="filesStore.searchTerm"
+            />
+            <span
+              class="absolute start-0 inset-y-0 flex items-center justify-center px-2"
+            >
+              <Search class="text-muted-foreground" :size="20" />
+            </span>
+          </div>
         </div>
+
         <div
           class="pl-4 pr-3 pt-1 pb-6 flex flex-col gap-1 overflow-y-auto overflow-x-hidden"
         >
