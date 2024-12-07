@@ -5,6 +5,7 @@ export type File = {
   id: number;
   name: string;
   content: string;
+  copiedFrom?: number;
   createdAt: Date;
 };
 
@@ -51,6 +52,7 @@ export const useFilesStore = defineStore("files", () => {
       name: newFileName,
       content: file.content,
       id: files.value.length + 1,
+      copiedFrom: file.id,
       createdAt: new Date(),
     };
     files.value.push(newFile);
