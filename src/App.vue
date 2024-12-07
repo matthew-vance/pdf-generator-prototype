@@ -5,9 +5,15 @@ import { useColorMode } from "@vueuse/core";
 const TitleBar = defineAsyncComponent(
   () => import("@/components/TitleBar.vue"),
 );
-import FileManagementPanel from "@/components/FileManagementPanel.vue";
-import PDFViewPanel from "@/components/PDFViewPanel.vue";
-import BottomBar from "@/components/BottomBar.vue";
+const FileManagementPanel = defineAsyncComponent(
+  () => import("@/components/FileManagementPanel.vue"),
+);
+const PDFViewPanel = defineAsyncComponent(
+  () => import("@/components/PDFViewPanel.vue"),
+);
+const BottomBar = defineAsyncComponent(
+  () => import("@/components/BottomBar.vue"),
+);
 
 useColorMode();
 </script>
