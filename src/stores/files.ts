@@ -24,11 +24,12 @@ export const useFilesStore = defineStore("files", () => {
     ),
   );
 
-  function addFile(name: string, content: string) {
+  function addFile(name: string, content: string, copiedFrom?: number) {
     const newFile = {
       name,
       content,
       id: files.value.length + 1,
+      copiedFrom,
       createdAt: new Date(),
     };
     files.value.push(newFile);
@@ -48,15 +49,7 @@ export const useFilesStore = defineStore("files", () => {
     const extension = nameParts.pop();
     const baseName = nameParts.join(".");
     const newFileName = `${baseName} copy.${extension}`;
-    const newFile = {
-      name: newFileName,
-      content: file.content,
-      id: files.value.length + 1,
-      copiedFrom: file.id,
-      createdAt: new Date(),
-    };
-    files.value.push(newFile);
-    selectFile(newFile);
+    addFile(newFileName, file.content, file.id);
   }
 
   function deleteFile(file: File) {
