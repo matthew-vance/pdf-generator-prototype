@@ -31,22 +31,3 @@ useColorMode();
     </main>
   </div>
 </template>
-
-<style lang="css" scoped>
-.rightSidebar-enter-active,
-.rightSidebar-leave-active,
-.leftSidebar-enter-active,
-.leftSidebar-leave-active {
-  transition: transform 0.3s ease-in-out;
-}
-
-.rightSidebar-enter-from,
-.rightSidebar-leave-to {
-  transform: translateX(384px);
-}
-
-.leftSidebar-enter-from,
-.leftSidebar-leave-to {
-  transform: translateX(-240px);
-}
-</style>
