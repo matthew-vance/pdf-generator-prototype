@@ -20,12 +20,6 @@ export const theme = {
     },
   },
   extend: {
-    gridTemplateColumns: {
-      layout: "240px 1fr 384px",
-    },
-    gridTemplateRows: {
-      layout: "48px minmax(0,1fr) 48px",
-    },
     colors: {
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",

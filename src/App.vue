@@ -19,15 +19,20 @@ useColorMode();
 </script>
 
 <template>
-  <div class="h-screen">
-    <main
-      class="h-full grid grid-cols-layout grid-rows-layout overflow-y-hidden overflow-x-hidden bg-zinc-900"
-    >
-      <TitleBar class="pl-20 col-span-full border-b bg-background" />
-      <FileManagementPanel class="border-r bg-background" />
-      <section class="w-full"></section>
-      <PDFViewPanel class="border-l bg-background" />
-      <BottomBar class="flex col-span-full border-t bg-background" />
+  <div
+    class="h-screen grid grid-rows-[auto_1fr_auto] grid-cols-[270px_1fr] bg-zinc-900"
+  >
+    <div class="col-span-full bg-background border-b p-2 pl-20">
+      <TitleBar />
+    </div>
+    <div class="bg-background border-r overflow-hidden">
+      <FileManagementPanel />
+    </div>
+    <main class="overflow-hidden">
+      <PDFViewPanel />
     </main>
+    <div class="col-span-full bg-background border-t">
+      <BottomBar />
+    </div>
   </div>
 </template>
